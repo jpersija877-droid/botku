@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import TelegramBot from "node-telegram-bot-api";
 import pkg from "whatsapp-web.js";
 import qrcode from "qrcode";
