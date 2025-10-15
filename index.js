@@ -247,13 +247,13 @@ bot.on("message", async (msg) => {
   // Pisahkan semua nomor (tiap baris)
   const numbers = text.split(/\r?\n/).map((n) => normalize(n)).filter((n) => n.length > 8);
   if (numbers.length === 0) {
-    await bot.sendMessage(chatId, "⚠️ Kirim daftar nomor, satu per baris.");
+    await bot.sendMessage(chatId, "⚠️ Kalo Ngirim Nomor Itu Yang Baleg Sialan.");
     return;
   }
 
   // Batasi maksimal 50 nomor
-  if (numbers.length > 50) {
-    await bot.sendMessage(chatId, "⚠️ Maksimal 50 nomor per request! Anda mengirim " + numbers.length + " nomor.");
+  if (numbers.length > 100) {
+    await bot.sendMessage(chatId, "⚠️ Cukup Meren 100 Piraku Ek Nambah Deui");
     return;
   }
 
@@ -262,7 +262,7 @@ bot.on("message", async (msg) => {
     return;
   }
 
-  const progressMsg = await bot.sendMessage(chatId, `🔍 Mengecek ${numbers.length} nomor...\nProgres: 0/${numbers.length}`);
+  const progressMsg = await bot.sendMessage(chatId, `🔍 Mengecek ${numbers.length} Nomor..\nProgres: 0/${numbers.length}`);
 
   let registered = [];
   let unregistered = [];
@@ -283,9 +283,9 @@ bot.on("message", async (msg) => {
   for (const num of cachedNumbers) {
     const result = checkedNumbers.get(num);
     if (result) {
-      registered.push(`+${num} --> ✅ TerHIT`);
+      registered.push(`+${num} --> ✅ Sudah Di Cek`);
     } else {
-      unregistered.push(`+${num} --> ❌ TerHIT`);
+      unregistered.push(`+${num} --> ❌ Sudah Di Cek`);
     }
   }
   
@@ -328,9 +328,9 @@ bot.on("message", async (msg) => {
         if (!value.success) {
           unregistered.push(`+${value.num} --> ⚠️ Error`);
         } else if (value.result) {
-          registered.push(`+${value.num} --> ✅ Terdaftar`);
+          registered.push(`+${value.num} --> ✅ Mantapp`);
         } else {
-          unregistered.push(`+${value.num} --> ❌ Tidak Terdaftar`);
+          unregistered.push(`+${value.num} --> ❌ Jangan Di coba`);
         }
       }
       processedCount++;
@@ -353,13 +353,13 @@ bot.on("message", async (msg) => {
 
   let resultMsg = "";
   if (registered.length) {
-    resultMsg += `✅ *Nomor Terdaftar:*\n${registered.join("\n")}\n\n`;
+    resultMsg += `✅ *Nomor Siap Tempurr:*\n${registered.join("\n")}\n\n`;
   }
   if (unregistered.length) {
-    resultMsg += `❌ *Nomor Tidak Terdaftar:*\n${unregistered.join("\n")}\n\n`;
+    resultMsg += `❌ *Jangan Di Coba:*\n${unregistered.join("\n")}\n\n`;
   }
   
-  resultMsg += `_by drixalexa_`;
+  resultMsg += `_by drixalexa😜_`;
 
   await bot.sendMessage(chatId, resultMsg, { parse_mode: "Markdown" });
 });
